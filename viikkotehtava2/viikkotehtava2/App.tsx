@@ -10,31 +10,29 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-    {(modalVisible ==true && //jos modal halutaan näyttää eli modalvisible true
+    
       <Modal
+      onRequestClose={()=>{setmodalVisible(false)}} //androidilla sulkee modalin "back" napista
       visible={modalVisible}
       transparent={true}
       animationType='fade'
       >
+        <View style={styles.container}>
        <View style={styles.modal}>
    
-          <Text style={styles.modalText}>This is a Modal...</Text>
+          <Text style={styles.modalText}>This is Modal...</Text>
           <Pressable onPress={()=>{setmodalVisible(false)}}><Text style={styles.closeBtn}>close</Text></Pressable>
            </View> 
+           </View>
            </Modal>
         
-    
-
-    )}{(modalVisible === false && //jos modalVisible ei ole näkyvissä (false) näyttää perusnäkymän
-    <View style={styles.container}>
+   
       <Pressable onPress={()=>{setmodalVisible(true)}}>
-      <Text>Show modal message</Text>
+      <Text style={styles.modalText}>Show modal message</Text>
       </Pressable>
     
         
-      <StatusBar style="auto" />
-    </View>
-)}
+      
     </View>
   );
 }
@@ -46,21 +44,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },modal:{
-    flex: 1,
-    width:'100%',
-    height: 100,
+
+
     borderColor: 'black',
     backgroundColor: 'white',
-    borderRadius: 5,
-    padding: 5,
-    justifyContent: 'center',
+
+    padding: 50,
+   marginBottom:'40%',
+    width:'100%',
+
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
-
+    shadowRadius: 3,
+    shadowOpacity: 0.25,
+    elevation: 5,
       
 
   },modalText:{
@@ -69,7 +70,9 @@ const styles = StyleSheet.create({
      fontSize:20 
     },closeBtn:{
       fontWeight: 'bold',
-      marginTop : 10,
+      marginTop: 20,
+      fontSize:15,
+
 
     }
 });
